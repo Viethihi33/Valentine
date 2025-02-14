@@ -70,28 +70,53 @@
     </div>
     <script>
         const messages = [
-            "Are you sure?",
-            "Really sure??",
-            "Are you positive?",
-            "Pookie please...",
-            "Just think about it!",
-            "If you say no, I will be really sad...",
-            "I will be very sad...",
-            "I will be very very very sad...",
-            "Ok fine, I will stop asking...",
-            "Just kidding, say yes please! ❤️"
-        ];
+        "Are you sure?",
+        "Really sure??",
+        "Are you positive?",
+        "Pookie please...",
+        "Just think about it!",
+        "If you say no, I will be really sad...",
+        "I will be very sad...",
+        "I will be very very very sad...",
+        "Ok fine, I will stop asking...",
+        "Just kidding, say yes please! ❤️"
+    ];
 
-        let messageIndex = 0;
+    const gifUrls = [
+        "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnlhNnVha2lxZ3psaHFlZzc5bnp6MzV3cDNhZndvbDR6a2Z3c2ljeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/W4zO9PSNXYMiYefZ4T/giphy.gif",
+        "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxxbWNtbHpqMWgwczFzdzF4N2tjZHp1emozNzhwODI1NmQ5YWsyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AhNIakkgmSKlD4NEcf/giphy.gif",
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHRrMGd4bTZ5cngxd252cTEzdm5xODRwZ2QycDg2bHpjaHo0Zjl3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgAWzvvcohEMofu/giphy.gif",
+        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHd0MTBxajdiNjQ4NmZqOXVkbHlxbGJhY2FxcjQ3MHZpa2JuMDdzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ov9jZ0V6gOO0oa98Y/giphy.gif",
+        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2duN2Fmcmp1dTFmNzI2Zjdtb2p6bThkeDQ3MzZmOGw4aTh6ZTV2cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1ezBmYXT1ccSbh0fep/giphy.gif",
+        "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGlxYTRnNG5nOTMzYTN2OXh4ZjI0cHFuenUxM3lqMWdsODRjZWp6byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JsVlBMEaHdOEGQKLXB/giphy.gif",
+        "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHk4bXlxNGMzcWkxbXB0bHVodDU3NDFqbzdybHZtdzdoMTZnbWtoZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7aCYnXnYF5T5sxlm/giphy.gif",
+        "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWg2aWR3bjA2MHdhcTBnbG5nYmIzM3VldXk2MTJwdG5qejB0OTZlNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OwMEl8wJNnSRaYXjAD/giphy.gif",
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHphbmc1ZDlhb3J3cHR2ZXBxMGoxY3ZieW4zdzdrOWJrZXZobXJlOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QMKnrWzQ8MydkXOkuk/giphy.gif",
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHRrMGd4bTZ5cngxd252cTEzdm5xODRwZ2QycDg2bHpjaHo0Zjl3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgAWzvvcohEMofu/giphy.gif"
 
-        function handleNoClick() {
-            const noButton = document.querySelector('.no-button');
-            const yesButton = document.querySelector('.yes-button');
-            noButton.textContent = messages[messageIndex];
-            messageIndex = (messageIndex + 1) % messages.length;
-            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${currentSize * 1.5}px`;
-        }
+    ];
+
+    let messageIndex = 0;
+    let gifIndex = 0;
+
+    function handleNoClick() {
+        const noButton = document.querySelector('.no-button');
+        const yesButton = document.querySelector('.yes-button');
+        const gifImage = document.querySelector('.gif_container img');
+
+        // Đổi text của nút "No"
+        noButton.textContent = messages[messageIndex];
+        messageIndex = (messageIndex + 1) % messages.length;
+
+        // Tăng kích thước nút "Yes"
+        const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+        yesButton.style.fontSize = `${currentSize * 1.5}px`;
+
+        // Thay đổi ảnh GIF
+        gifImage.src = gifUrls[gifIndex];
+        gifIndex = (gifIndex + 1) % gifUrls.length;
+    }
+
 
         function handleYesClick() {
             document.getElementById('main-container').classList.add('hidden');
